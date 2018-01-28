@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class LoadRoomState : State
 {
-
+	public override void Activate()
+	{
+		Map.instance.currentRoom.Load();
+	}
 }

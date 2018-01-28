@@ -20,7 +20,7 @@ public struct HexLoc
 
 	public Vector3 ToWorld()
 	{
-		Vector3 worldPos = new Vector3(0.5f * (y - z) * Mathf.Sqrt(3), h, 1.5f * x);
+		Vector3 worldPos = new Vector3((y - z) / 2f, h, x * (Mathf.Sqrt(3) / 2f));
 		return worldPos;
 	}
 

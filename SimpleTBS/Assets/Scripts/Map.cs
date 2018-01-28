@@ -6,6 +6,7 @@ public class Map : MonoBehaviour
 {
 	public Dictionary<HexLoc, Room> rooms = new Dictionary<HexLoc, Room>();
 	public int radius;
+	public Room currentRoom;
 
 	public static Map instance;
 	private void Awake() { instance = this; }
@@ -37,6 +38,8 @@ public class Map : MonoBehaviour
 		{
 			r.FindConnections();
 		}
+		List<Room> locs = new List<Room>(rooms.Values);
+		currentRoom = locs[Random.Range(0, rooms.Count - 1)];
 	}
 
 	Room AddRoom(HexLoc h)
