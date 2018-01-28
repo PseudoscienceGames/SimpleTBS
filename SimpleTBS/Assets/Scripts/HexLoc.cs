@@ -55,6 +55,12 @@ public struct HexLoc
 			moveTo.x--;
 		if ((int)dir == 5)
 			moveTo.y--;
+		moveTo.z = (int)(0 - (moveTo.x + moveTo.y));
 		return moveTo;
+	}
+
+	public override string ToString()
+	{
+		return "(" + x + ", " + y + ", " + z + ")";
 	}
 }

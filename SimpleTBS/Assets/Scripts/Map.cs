@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
-	List<Room> rooms = new List<Room>();
+	public Dictionary<HexLoc, Room> rooms = new Dictionary<HexLoc, Room>();
 	public int radius;
+
+	public static Map instance;
+	private void Awake() { instance = this; }
 
 	public void GenMap()
 	{
@@ -16,12 +19,10 @@ public class Map : MonoBehaviour
 			{
 				//Set initial hex grid location
 				HexLoc loc = new HexLoc(fRadius, -fRadius, 0);
-
 				HexDir dir = (HexDir)2;
 				//Find data for each hex in the ring (each ring has 6 more hexes than the last)
 				for (int fHex = 0; fHex < 6 * fRadius; fHex++)
 				{
-					Debug.Log(loc.ToWorld());
 					AddRoom(loc);
 					//Finds next hex in ring
 					loc = loc.MoveTo(dir);
@@ -32,6 +33,10 @@ public class Map : MonoBehaviour
 				}
 			}
 		}
+		foreach(Room r in rooms.Values)
+		{
+			r.FindConnections();
+		}
 	}
 
 	Room AddRoom(HexLoc h)
@@ -39,6 +44,7 @@ public class Map : MonoBehaviour
 		Room r = (Instantiate(Resources.Load("Room")) as GameObject).GetComponent<Room>();
 		r.loc = h;
 		r.transform.position = h.ToWorld();
+		rooms.Add(h, r);
 		return r;
 	}
 }
