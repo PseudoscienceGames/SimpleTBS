@@ -6,7 +6,7 @@ public class Room : MonoBehaviour
 {
 	public HexLoc loc;
 	public List<HexLoc> connections = new List<HexLoc>();
-	public List<HexLoc> locs = new List<HexLoc>();
+	public Dictionary<HexLoc, HexTile> locs = new Dictionary<HexLoc, HexTile>();
 
 	public void FindConnections()
 	{
@@ -43,11 +43,22 @@ public class Room : MonoBehaviour
 				}
 			}
 		}
+		foreach (HexTile t in locs.Values)
+		{
+			t.FindConnections();
+		}
+
 	}
 
 	void AddLoc(HexLoc loc)
 	{
-		locs.Add(loc);
-		Instantiate(Resources.Load("Tile"), loc.ToWorld(), Quaternion.identity);
+		int randHeight = Random.Range(0, 5);
+		int yRot = Random.Range(0, 6) * 60;
+		int xRot = Random.Range(0, 2) * 180;
+		Quaternion rot = Quaternion.Euler(xRot, yRot, 0);
+		loc.h = randHeight;
+		HexTile t = (Instantiate(Resources.Load("Tile"), loc.ToWorld(), rot) as GameObject).GetComponent<HexTile>();
+		t.loc = loc;
+		locs.Add(loc, t);
 	}
 }

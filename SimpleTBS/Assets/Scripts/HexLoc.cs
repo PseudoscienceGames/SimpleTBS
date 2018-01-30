@@ -20,7 +20,7 @@ public struct HexLoc
 
 	public Vector3 ToWorld()
 	{
-		Vector3 worldPos = new Vector3((y - z) / 2f, h, x * (Mathf.Sqrt(3) / 2f));
+		Vector3 worldPos = new Vector3((y - z) / 2f, h / 4f, x * (Mathf.Sqrt(3) / 2f));
 		return worldPos;
 	}
 
@@ -57,6 +57,13 @@ public struct HexLoc
 			moveTo.y--;
 		moveTo.z = (int)(0 - (moveTo.x + moveTo.y));
 		return moveTo;
+	}
+
+	public HexLoc MoveUp()
+	{
+		HexLoc h = this;
+		h.h++;
+		return h;
 	}
 
 	public override string ToString()
