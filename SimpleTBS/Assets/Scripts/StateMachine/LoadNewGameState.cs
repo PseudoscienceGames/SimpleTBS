@@ -8,6 +8,12 @@ public class LoadNewGameState : State
 	{
 		GameObject.Find("MainMenu").SetActive(false);
 		Instantiate(Resources.Load("Room"));
-		GetComponent<StateMachine>().ChangeState<LoadRoomState>();
+		Room.Instance.Load();
+		Instantiate(Resources.Load("UnitController"));
+		UnitController.Instance.AddUnits();
+		if(UnitController.Instance.init[0].isAI)
+			GetComponent<StateMachine>().ChangeState<CompUnitControlState>();
+		else
+			GetComponent<StateMachine>().ChangeState<PlayerUnitControlState>();
 	}
 }

@@ -14,7 +14,7 @@ public class Room : MonoBehaviour
 
 	public void Load()
 	{
-		int radius = Random.Range(3, 7);
+		int radius = 7;
 
 		if (radius > 0)
 		{
