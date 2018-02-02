@@ -12,7 +12,7 @@ public class HexTile : MonoBehaviour
 		for (int i = 0; i < 6; i++)
 		{
 			HexLoc h = loc.MoveTo((HexDir)i);
-			if (Map.instance.currentRoom.locs.ContainsKey(h))
+			if (Room.Instance.locs.ContainsKey(h))
 				connections.Add(h);
 		}
 	}

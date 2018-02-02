@@ -4,18 +4,12 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-	public HexLoc loc;
-	public List<HexLoc> connections = new List<HexLoc>();
 	public Dictionary<HexLoc, HexTile> locs = new Dictionary<HexLoc, HexTile>();
 
-	public void FindConnections()
+	public static Room Instance;
+	private void Awake()
 	{
-		for(int i = 0; i < 6; i++)
-		{
-			HexLoc h = loc.MoveTo((HexDir)i);
-			if (Map.instance.rooms.ContainsKey(h))
-				connections.Add(h);
-		}
+		Instance = this;
 	}
 
 	public void Load()
@@ -52,13 +46,18 @@ public class Room : MonoBehaviour
 
 	void AddLoc(HexLoc loc)
 	{
-		int randHeight = Random.Range(0, 5);
+		int randHeight = Random.Range(0, 3);
 		int yRot = Random.Range(0, 6) * 60;
-		int xRot = Random.Range(0, 2) * 180;
-		Quaternion rot = Quaternion.Euler(xRot, yRot, 0);
+		Quaternion rot = Quaternion.Euler(0, yRot, 0);
 		loc.h = randHeight;
 		HexTile t = (Instantiate(Resources.Load("Tile"), loc.ToWorld(), rot) as GameObject).GetComponent<HexTile>();
 		t.loc = loc;
 		locs.Add(loc, t);
+		for(int i = loc.h - 1; i >= 0; i--)
+		{
+			HexLoc newLoc = loc;
+			newLoc.h = i;
+			Instantiate(Resources.Load("TileBlank"), newLoc.ToWorld(), Quaternion.identity);
+		}
 	}
 }
