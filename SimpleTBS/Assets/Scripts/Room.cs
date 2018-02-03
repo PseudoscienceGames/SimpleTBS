@@ -5,6 +5,7 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
 	public Dictionary<HexLoc, HexTile> locs = new Dictionary<HexLoc, HexTile>();
+	public Dictionary<HexLoc, GameObject> occupiedTiles = new Dictionary<HexLoc, GameObject>();
 
 	public static Room Instance;
 	private void Awake()
@@ -51,13 +52,20 @@ public class Room : MonoBehaviour
 		Quaternion rot = Quaternion.Euler(0, yRot, 0);
 		loc.h = randHeight;
 		HexTile t = (Instantiate(Resources.Load("Tile"), loc.ToWorld(), rot) as GameObject).GetComponent<HexTile>();
+		t.transform.parent = transform;
 		t.loc = loc;
 		locs.Add(loc, t);
 		for(int i = loc.h - 1; i >= 0; i--)
 		{
 			HexLoc newLoc = loc;
 			newLoc.h = i;
-			Instantiate(Resources.Load("TileBlank"), newLoc.ToWorld(), Quaternion.identity);
+			GameObject nt = Instantiate(Resources.Load("TileBlank"), newLoc.ToWorld(), Quaternion.identity) as GameObject;
+			nt.transform.parent = t.transform;
 		}
+	}
+
+	public void AddObject(HexLoc h, GameObject o)
+	{
+		occupiedTiles.Add(h, o);
 	}
 }

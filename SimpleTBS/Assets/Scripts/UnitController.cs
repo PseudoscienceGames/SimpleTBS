@@ -29,6 +29,8 @@ public class UnitController : MonoBehaviour
 			HexLoc h = new List<HexLoc>(Room.Instance.locs.Keys)[Random.Range(0, Room.Instance.locs.Count - 1)];
 			u.loc = h;
 			u.transform.position = u.loc.ToWorld();
+			u.transform.parent = transform;
+			Room.Instance.AddObject(h, u.gameObject);
 		}
 	}
 
@@ -42,6 +44,8 @@ public class UnitController : MonoBehaviour
 			u.loc = h;
 			u.transform.position = u.loc.ToWorld();
 			u.isAI = true;
+			u.transform.parent = transform;
+			Room.Instance.AddObject(h, u.gameObject);
 		}
 	}
 
