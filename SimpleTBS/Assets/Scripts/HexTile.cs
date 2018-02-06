@@ -5,15 +5,21 @@ using UnityEngine;
 public class HexTile : MonoBehaviour
 {
 	public HexLoc loc;
-	public List<HexLoc> connections = new List<HexLoc>();
+	public int height;
+	public List<HexTile> connections = new List<HexTile>();
 
 	public void FindConnections()
 	{
 		for (int i = 0; i < 6; i++)
 		{
-			HexLoc h = loc.MoveTo((HexDir)i);
-			if (Room.Instance.locs.ContainsKey(h))
+			HexTile h = Room.Instance.GetTile(loc.MoveTo((HexDir)i));
+			if(h != null)
 				connections.Add(h);
 		}
+	}
+
+	public Vector3 WorldLoc()
+	{
+		return loc.ToWorld() + (Vector3.up * height * 0.25f);
 	}
 }

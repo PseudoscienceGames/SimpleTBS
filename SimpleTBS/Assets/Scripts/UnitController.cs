@@ -28,7 +28,7 @@ public class UnitController : MonoBehaviour
 			playerUnits.Add(u);
 			HexLoc h = new List<HexLoc>(Room.Instance.locs.Keys)[Random.Range(0, Room.Instance.locs.Count - 1)];
 			u.loc = h;
-			u.transform.position = u.loc.ToWorld();
+			u.transform.position = Room.Instance.GetTile(u.loc).WorldLoc();
 			u.transform.parent = transform;
 			Room.Instance.AddObject(h, u.gameObject);
 		}
@@ -42,7 +42,7 @@ public class UnitController : MonoBehaviour
 			compUnits.Add(u);
 			HexLoc h = new List<HexLoc>(Room.Instance.locs.Keys)[Random.Range(0, Room.Instance.locs.Count - 1)];
 			u.loc = h;
-			u.transform.position = u.loc.ToWorld();
+			u.transform.position = Room.Instance.GetTile(u.loc).WorldLoc();
 			u.isAI = true;
 			u.transform.parent = transform;
 			Room.Instance.AddObject(h, u.gameObject);
@@ -54,5 +54,19 @@ public class UnitController : MonoBehaviour
 		init.AddRange(playerUnits);
 		init.AddRange(compUnits);
 		//sort by speed
+	}
+
+	public void NextUnit()
+	{
+		UnitController.Instance.init.Remove(GetComponent<Unit>());
+		UnitController.Instance.init.Add(GetComponent<Unit>());
+		for(int i = 0; i < Selector.Instance.transform.childCount - 1; i++)
+		{
+			DestroyImmediate(Selector.Instance.transform.GetChild(0).gameObject);
+		}
+		if (UnitController.Instance.init[0].isAI)
+			StateMachine.Instance.ChangeState<CompUnitControlState>();
+		else
+			StateMachine.Instance.ChangeState<PlayerUnitControlState>();
 	}
 }

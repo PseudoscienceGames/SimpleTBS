@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
+	public static StateMachine Instance;
+
 	public State state;
 
 	public void ChangeState<T> () where T : State
@@ -19,6 +21,7 @@ public class StateMachine : MonoBehaviour
 
 	private void Awake()
 	{
+		Instance = this;
 		ChangeState<LoadMainMenuState>();
 	}
 }

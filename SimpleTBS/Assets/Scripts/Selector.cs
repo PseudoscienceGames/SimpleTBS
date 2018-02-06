@@ -5,13 +5,14 @@ using UnityEngine;
 public class Selector : MonoBehaviour
 {
 	public static Selector Instance;
+	public Unit u;
 	private void Awake()
 	{
 		Instance = this;
 	}
 
-	public void SetLocation(HexLoc h)
+	public void SetLocation(HexTile h)
 	{
-		transform.position = h.ToWorld();
+		transform.position = h.WorldLoc();
 	}
 }

@@ -13,7 +13,13 @@ public class UnitControlState : State
 	void SelectActiveUnit()
 	{
 		if (!GameObject.Find("Selector"))
-			Instantiate(Resources.Load("Selector"));
-		Selector.Instance.SetLocation(UnitController.Instance.init[0].loc);
+		{
+			GameObject s = Instantiate(Resources.Load("Selector")) as GameObject;
+			s.name = "Selector";
+
+		}
+		Selector.Instance.SetLocation(Room.Instance.GetTile(UnitController.Instance.init[0].loc));
+		CameraControl.Instance.FocusCam(UnitController.Instance.init[0].loc);
+		Selector.Instance.u = UnitController.Instance.init[0];
 	}
 }

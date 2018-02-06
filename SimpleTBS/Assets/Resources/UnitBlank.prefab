@@ -37,6 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4588109696935442}
   - component: {fileID: 114532013947743842}
+  - component: {fileID: 114115380537245878}
   m_Layer: 0
   m_Name: UnitBlank
   m_TagString: Untagged
@@ -112,6 +113,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1111232532084778}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114115380537245878
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1194901317312638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4495009f63da2f141b3c040339303d6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114532013947743842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127,4 +139,5 @@ MonoBehaviour:
     x: 0
     y: 0
     z: 0
-    h: 0
+  isAI: 0
+  moveRange: 3

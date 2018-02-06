@@ -8,19 +8,17 @@ public struct HexLoc
 	public int x;
 	public int y;
 	public int z;
-	public int h;
 
-	public HexLoc(int x, int y, int h)
+	public HexLoc(int x, int y)
 	{
 		this.x = x;
 		this.y = y;
 		z = (int)(0 - (x + y));
-		this.h = h;
 	}
 
 	public Vector3 ToWorld()
 	{
-		Vector3 worldPos = new Vector3((y - z) / 2f, h / 4f, x * (Mathf.Sqrt(3) / 2f));
+		Vector3 worldPos = new Vector3((y - z) / 2f, 0, x * (Mathf.Sqrt(3) / 2f));
 		return worldPos;
 	}
 
@@ -36,7 +34,7 @@ public struct HexLoc
 	public HexLoc MoveTo(HexDir dir)
 	{
 		dir = MoveDirFix(dir);
-		HexLoc moveTo = new HexLoc(this.x, this.y, this.h);
+		HexLoc moveTo = new HexLoc(this.x, this.y);
 		if ((int)dir == 0)
 		{
 			moveTo.x++;
@@ -57,13 +55,6 @@ public struct HexLoc
 			moveTo.y--;
 		moveTo.z = (int)(0 - (moveTo.x + moveTo.y));
 		return moveTo;
-	}
-
-	public HexLoc MoveUp()
-	{
-		HexLoc h = this;
-		h.h++;
-		return h;
 	}
 
 	public override string ToString()

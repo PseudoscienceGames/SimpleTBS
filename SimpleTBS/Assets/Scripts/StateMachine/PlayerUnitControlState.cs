@@ -9,4 +9,19 @@ public class PlayerUnitControlState : UnitControlState
 		base.Activate();
 
 	}
+
+	private void Update()
+	{
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit;
+		if (Input.GetMouseButtonDown(0))
+		{
+			if (Physics.Raycast(ray, out hit))
+			{
+				if (ActionMenu.Instance == null)
+					Instantiate(Resources.Load("ActionMenuCanvas"));
+				ActionMenu.Instance.Activate(hit.transform.GetComponent<TileMarker>().t);
+			}
+		}
+	}
 }

@@ -19,11 +19,11 @@ public class Room : MonoBehaviour
 
 		if (radius > 0)
 		{
-			AddLoc(new HexLoc(0, 0, 0));
+			AddLoc(new HexLoc(0, 0));
 			for (int fRadius = 1; fRadius <= radius; fRadius++)
 			{
 				//Set initial hex grid location
-				HexLoc loc = new HexLoc(fRadius, -fRadius, 0);
+				HexLoc loc = new HexLoc(fRadius, -fRadius);
 				HexDir dir = (HexDir)2;
 				//Find data for each hex in the ring (each ring has 6 more hexes than the last)
 				for (int fHex = 0; fHex < 6 * fRadius; fHex++)
@@ -50,16 +50,17 @@ public class Room : MonoBehaviour
 		int randHeight = Random.Range(0, 3);
 		int yRot = Random.Range(0, 6) * 60;
 		Quaternion rot = Quaternion.Euler(0, yRot, 0);
-		loc.h = randHeight;
-		HexTile t = (Instantiate(Resources.Load("Tile"), loc.ToWorld(), rot) as GameObject).GetComponent<HexTile>();
+		Vector3 worldLoc = loc.ToWorld() + (Vector3.up * randHeight * 0.25f);
+		HexTile t = (Instantiate(Resources.Load("Tile"), worldLoc, rot) as GameObject).GetComponent<HexTile>();
+		t.height = randHeight;
 		t.transform.parent = transform;
 		t.loc = loc;
 		locs.Add(loc, t);
-		for(int i = loc.h - 1; i >= 0; i--)
+		for(int i = randHeight - 1; i >= 0; i--)
 		{
 			HexLoc newLoc = loc;
-			newLoc.h = i;
-			GameObject nt = Instantiate(Resources.Load("TileBlank"), newLoc.ToWorld(), Quaternion.identity) as GameObject;
+			Vector3 worldLoc2 = newLoc.ToWorld() + (Vector3.up * i * 0.25f);
+			GameObject nt = Instantiate(Resources.Load("TileBlank"), worldLoc2, Quaternion.identity) as GameObject;
 			nt.transform.parent = t.transform;
 		}
 	}
@@ -67,5 +68,10 @@ public class Room : MonoBehaviour
 	public void AddObject(HexLoc h, GameObject o)
 	{
 		occupiedTiles.Add(h, o);
+	}
+
+	public HexTile GetTile(HexLoc h)
+	{
+		return (locs.ContainsKey(h) ? locs[h] : null);
 	}
 }
