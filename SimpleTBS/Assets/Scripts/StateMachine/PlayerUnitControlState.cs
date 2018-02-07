@@ -21,6 +21,7 @@ public class PlayerUnitControlState : UnitControlState
 				if (ActionMenu.Instance == null)
 					Instantiate(Resources.Load("ActionMenuCanvas"));
 				ActionMenu.Instance.Activate(hit.transform.GetComponent<TileMarker>().t);
+				StateMachine.Instance.ChangeState<PlayerUnitControlHexSelectedState>();
 			}
 		}
 	}

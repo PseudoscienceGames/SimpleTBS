@@ -58,12 +58,14 @@ public class UnitController : MonoBehaviour
 
 	public void NextUnit()
 	{
-		UnitController.Instance.init.Remove(GetComponent<Unit>());
-		UnitController.Instance.init.Add(GetComponent<Unit>());
-		for(int i = 0; i < Selector.Instance.transform.childCount - 1; i++)
+		Unit u = init[0];
+		UnitController.Instance.init.RemoveAt(0);
+		UnitController.Instance.init.Add(u);
+		for (int i = 0; i < ActionMenu.Instance.transform.childCount; i++)
 		{
-			DestroyImmediate(Selector.Instance.transform.GetChild(0).gameObject);
+			DestroyImmediate(ActionMenu.Instance.transform.GetChild(i).gameObject);
 		}
+		DestroyImmediate(Selector.Instance.gameObject);
 		if (UnitController.Instance.init[0].isAI)
 			StateMachine.Instance.ChangeState<CompUnitControlState>();
 		else

@@ -10,11 +10,14 @@ public class StateMachine : MonoBehaviour
 
 	public void ChangeState<T> () where T : State
 	{
+
 		if(state != null)
 			state.enabled = false;
 		T s = GetComponent<T>();
 		if (s == null)
 			s = gameObject.AddComponent<T>();
+		else
+			s.enabled = true;
 		state = s;
 		state.Activate();
 	}

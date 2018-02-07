@@ -11,6 +11,7 @@ public class Unit : MonoBehaviour
 
 	public void CalcActions()
 	{
+		possibleActions.Clear();
 		foreach(UnitAction a in GetComponents<UnitAction>())
 		{
 			List<HexTile> hs = a.CalcPossibleActions();

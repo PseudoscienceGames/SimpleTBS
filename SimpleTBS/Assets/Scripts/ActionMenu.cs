@@ -20,7 +20,10 @@ public class ActionMenu : MonoBehaviour
 
 	public void Activate(HexTile pos)
 	{
-		foreach(GameObject c in transform)
+		for(int i = 0; i < transform.childCount; i++)
+		{
+			DestroyImmediate(transform.GetChild(i).gameObject);
+		}
 		worldPos = pos.WorldLoc();
 		foreach (UnitAction a in Selector.Instance.u.GetComponents<UnitAction>())
 		{
