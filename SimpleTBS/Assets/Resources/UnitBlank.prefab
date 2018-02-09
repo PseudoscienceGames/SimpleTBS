@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33799731019044958}
   - component: {fileID: 23953741509473778}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4588109696935442}
   - component: {fileID: 114532013947743842}
   - component: {fileID: 114115380537245878}
+  - component: {fileID: 114592905283517250}
   m_Layer: 0
   m_Name: UnitBlank
   m_TagString: Untagged
@@ -52,8 +53,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1111232532084778}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4588109696935442}
   m_RootOrder: 0
@@ -86,7 +87,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 401c04b540775084b8e7061405c831be, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -112,7 +113,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1111232532084778}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300002, guid: f728b24b82412f941a10d1e94a0bd1c3, type: 3}
 --- !u!114 &114115380537245878
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -124,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4495009f63da2f141b3c040339303d6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: 
 --- !u!114 &114532013947743842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -139,5 +141,20 @@ MonoBehaviour:
     x: 0
     y: 0
     z: 0
+  maxHP: 10
+  currentHP: 10
   isAI: 0
   moveRange: 3
+--- !u!114 &114592905283517250
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1194901317312638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d30b084dc8690a74bb6c465e26fd0983, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: 
+  dmg: 3

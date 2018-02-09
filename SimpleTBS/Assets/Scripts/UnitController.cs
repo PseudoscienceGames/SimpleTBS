@@ -8,6 +8,10 @@ public class UnitController : MonoBehaviour
 	public List<Unit> playerUnits = new List<Unit>();
 	public List<Unit> compUnits = new List<Unit>();
 
+	//temp
+	public Material playerMat;
+	public Material aiMat;
+
 	public static UnitController Instance;
 	private void Awake()
 	{
@@ -30,6 +34,7 @@ public class UnitController : MonoBehaviour
 			u.loc = h;
 			u.transform.position = Room.Instance.GetTile(u.loc).WorldLoc();
 			u.transform.parent = transform;
+			u.transform.GetChild(0).GetComponent<MeshRenderer>().material = playerMat;
 			Room.Instance.AddObject(h, u.gameObject);
 		}
 	}
@@ -45,6 +50,7 @@ public class UnitController : MonoBehaviour
 			u.transform.position = Room.Instance.GetTile(u.loc).WorldLoc();
 			u.isAI = true;
 			u.transform.parent = transform;
+			u.transform.GetChild(0).GetComponent<MeshRenderer>().material = aiMat;
 			Room.Instance.AddObject(h, u.gameObject);
 		}
 	}
@@ -61,9 +67,10 @@ public class UnitController : MonoBehaviour
 		Unit u = init[0];
 		UnitController.Instance.init.RemoveAt(0);
 		UnitController.Instance.init.Add(u);
-		for (int i = 0; i < ActionMenu.Instance.transform.childCount; i++)
+		Debug.Log(ActionMenu.Instance.transform.childCount);
+		for (int i = ActionMenu.Instance.transform.childCount; i > 0; i--)
 		{
-			DestroyImmediate(ActionMenu.Instance.transform.GetChild(i).gameObject);
+			DestroyImmediate(ActionMenu.Instance.transform.GetChild(i - 1).gameObject);
 		}
 		DestroyImmediate(Selector.Instance.gameObject);
 		if (UnitController.Instance.init[0].isAI)

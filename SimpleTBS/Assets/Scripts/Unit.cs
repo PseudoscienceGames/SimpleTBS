@@ -5,6 +5,10 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
 	public HexLoc loc;
+
+	public int maxHP;
+	public int currentHP;
+
 	public bool isAI = false;
 	public int moveRange = 3;
 	public Dictionary<HexTile, List<UnitAction>> possibleActions = new Dictionary<HexTile, List<UnitAction>>();

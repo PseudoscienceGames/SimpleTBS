@@ -7,6 +7,6 @@ public class CompUnitControlState : UnitControlState
 	public override void Activate()
 	{
 		base.Activate();
-
+		UnitController.Instance.NextUnit();
 	}
 }

@@ -25,7 +25,7 @@ public class ActionMenu : MonoBehaviour
 			DestroyImmediate(transform.GetChild(i).gameObject);
 		}
 		worldPos = pos.WorldLoc();
-		foreach (UnitAction a in Selector.Instance.u.GetComponents<UnitAction>())
+		foreach (UnitAction a in Selector.Instance.u.possibleActions[pos])
 		{
 			Transform currentButton = (Instantiate(Resources.Load("ActionButton")) as GameObject).transform;
 			currentButton.transform.GetChild(0).GetComponent<Text>().text = a.actionName;
