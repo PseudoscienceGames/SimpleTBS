@@ -51,3 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 221a13e95d5ae5c42a2f8488f24392aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  init: []
+  playerUnits: []
+  compUnits: []
+  playerMat: {fileID: 2100000, guid: 401c04b540775084b8e7061405c831be, type: 2}
+  aiMat: {fileID: 2100000, guid: 401c04b540775084b8e7061405c831be, type: 2}
